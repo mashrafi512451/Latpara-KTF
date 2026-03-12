@@ -1,0 +1,8 @@
+{
+  "name": "Latpara Kalyan Trust Dashboard",
+  "description": "A financial dashboard for Latpara Kalyan Trust to track income, expenses, and net funds with role-based access control.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}

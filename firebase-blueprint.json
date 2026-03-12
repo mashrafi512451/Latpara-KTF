@@ -1,0 +1,69 @@
+{
+  "entities": {
+    "Income": {
+      "title": "Income",
+      "description": "Records of income received by the trust.",
+      "type": "object",
+      "properties": {
+        "date": { "type": "string", "format": "date", "description": "Date of income" },
+        "name": { "type": "string", "description": "Name of the donor" },
+        "amount": { "type": "number", "description": "Amount received" },
+        "method": { "type": "string", "enum": ["Bikash", "Nagad", "Cash"], "description": "Payment method" },
+        "comment": { "type": "string", "description": "Additional comments" },
+        "createdBy": { "type": "string", "description": "UID of the admin who added this" }
+      },
+      "required": ["date", "name", "amount", "method", "createdBy"]
+    },
+    "Expense": {
+      "title": "Expense",
+      "description": "Records of expenses incurred by the trust.",
+      "type": "object",
+      "properties": {
+        "date": { "type": "string", "format": "date", "description": "Date of expense" },
+        "category": { "type": "string", "description": "Category or purpose of expense" },
+        "amount": { "type": "number", "description": "Amount spent" },
+        "voucherUrl": { "type": "string", "description": "URL to the voucher image" },
+        "createdBy": { "type": "string", "description": "UID of the admin who added this" }
+      },
+      "required": ["date", "category", "amount", "createdBy"]
+    },
+    "User": {
+      "title": "User",
+      "description": "User profile and role information.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email", "description": "User's email" },
+        "role": { "type": "string", "enum": ["super_admin", "admin"], "description": "User's role" },
+        "displayName": { "type": "string", "description": "User's display name" }
+      },
+      "required": ["email", "role"]
+    },
+    "AppSettings": {
+      "title": "App Settings",
+      "description": "Global configuration for the application.",
+      "type": "object",
+      "properties": {
+        "showAmountsToPublic": { "type": "boolean", "description": "Whether to show donation amounts to public viewers" }
+      },
+      "required": ["showAmountsToPublic"]
+    }
+  },
+  "firestore": {
+    "/income/{incomeId}": {
+      "schema": "Income",
+      "description": "Collection of income records"
+    },
+    "/expenses/{expenseId}": {
+      "schema": "Expense",
+      "description": "Collection of expense records"
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Collection of user profiles"
+    },
+    "/settings/app": {
+      "schema": "AppSettings",
+      "description": "Global application settings"
+    }
+  }
+}
